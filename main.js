@@ -23,6 +23,8 @@ function start()
 
     var value = document.getElementById("object_name").value;
 
+
+
 }
 
 function modelLoaded()
@@ -58,6 +60,20 @@ function draw()
             noFill();
             stroke("#3d3ca6");
             rect(objects[i].x, objects[i].y , objects[i].width , objects[i].height);
+
+
+             if(objects[i].label == value)
+             {
+                 video.stop();
+                 objectDetector.detect(gotResult);
+                 document.getElementById("value").innerHTML = value + "Found";
+                 synth = window.speechSynthesis;
+                 utterThis = new SpeechSynthesisUtterance(value + "Found");
+                 synth.speak(utterThis);
+             }
+             else{
+                 document.getElementById("value").innerHTML = value + "Not Found";
+             }
         }
     }
 }
